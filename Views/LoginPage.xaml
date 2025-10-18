@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComercioMaui.Views.LoginPage"
+             Title="Inicio de Sesión">
+
+    <ContentPage.Resources>
+        <!-- Estilo básico para el contenedor central -->
+        <Style TargetType="VerticalStackLayout">
+            <Setter Property="BackgroundColor" Value="#80FFFFFF" />
+            <Setter Property="Spacing" Value="15" />
+            <Setter Property="Margin" Value="20" />
+            <Setter Property="MaximumWidthRequest" Value="400" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+        </Style>
+        <!-- Estilos para los botones -->
+        <Style x:Key="LoginButton" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#007ACC" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Margin" Value="0, 20, 0, 5" />
+        </Style>
+        <Style x:Key="RegisterButton" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="TextColor" Value="#007ACC" />
+            <Setter Property="FontSize" Value="Small" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Image Source="login.jpg"
+       Aspect="AspectFill"
+       HorizontalOptions="Fill"
+       VerticalOptions="Fill" />
+
+        <ScrollView VerticalOptions="CenterAndExpand">
+           <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+           <Label Text="COMERCIO MAUI" 
+           FontSize="Title" 
+           FontAttributes="Bold"
+           HorizontalOptions="Center"
+           HorizontalTextAlignment="Center"
+           Margin="0, 0, 0, 30"
+           TextColor="#007ACC"/>
+
+                <Label Text="Usuario" 
+           HorizontalOptions="Center"
+           HorizontalTextAlignment="Center"/>
+                <Entry x:Name="UsuarioEntry" 
+           Placeholder="Ingresa tu usuario"
+           HorizontalTextAlignment="Center"/>
+
+                <Label Text="Contraseña" 
+           HorizontalOptions="Center"
+           HorizontalTextAlignment="Center"/>
+                <Entry x:Name="ContrasenaEntry" 
+           Placeholder="Ingresa tu contraseña" 
+           IsPassword="True"
+           HorizontalTextAlignment="Center"/>
+
+                <Button Text="INICIAR SESIÓN" 
+            Style="{StaticResource LoginButton}" 
+            Clicked="OnLoginClicked"
+            HorizontalOptions="Center"/>
+
+                <Label x:Name="StatusLabel" 
+           TextColor="Red" 
+           HorizontalOptions="Center" 
+           HorizontalTextAlignment="Center"
+           Margin="0, 10, 0, 0"/>
+
+                <Button Text="¿No tienes cuenta? Regístrate aquí." 
+            Style="{StaticResource RegisterButton}"
+            Clicked="OnGoToRegisterClicked"
+            HorizontalOptions="Center"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

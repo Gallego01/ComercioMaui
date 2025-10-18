@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComercioMaui.Views.RegisterPage"
+             Title="Registro de Cliente"
+             BackgroundColor="#F4F7F9">
+
+    <ContentPage.Resources>
+        <Style TargetType="VerticalStackLayout">
+            <Setter Property="BackgroundColor" Value="#80FFFFFF" />
+            <Setter Property="Spacing" Value="10" />
+            <Setter Property="Margin" Value="20" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="MaximumWidthRequest" Value="600" />
+            <Setter Property="Shadow">
+                <Setter.Value>
+                    <Shadow Brush="Black" Radius="10" Offset="4,4" Opacity="0.3"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Entry">
+            <Setter Property="PlaceholderColor" Value="#AAAAAA" />
+            <Setter Property="Margin" Value="0, 0, 0, 5" />
+            <Setter Property="Keyboard" Value="Text" />
+        </Style>
+        <Style x:Key="PrimaryButton" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#007ACC" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Margin" Value="0, 15, 0, 5" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Image Source="login.jpg"
+       Aspect="AspectFill"
+       HorizontalOptions="Fill"
+       VerticalOptions="Fill" />
+        <ScrollView>
+            <VerticalStackLayout>
+
+                <Label Text="REGISTRO DE NUEVO CLIENTE" 
+                   FontSize="Title" 
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   Margin="0, 10, 0, 20"
+                   TextColor="#007ACC"/>
+
+                <Label Text="Datos Personales" FontAttributes="Bold" Margin="0, 10, 0, 0" HorizontalTextAlignment="Center"/>
+                <Entry x:Name="NombreEntry" Placeholder="Nombre"/>
+                <Entry x:Name="ApellidoEntry" Placeholder="Apellido"/>
+                <Entry x:Name="DniEntry" Placeholder="DNI" Keyboard="Numeric"/>
+                <DatePicker x:Name="FechaNacimientoPicker" Format="dd/MM/yyyy" Date="2000/01/01"/>
+
+                <Label Text="Contacto" FontAttributes="Bold" Margin="0, 15, 0, 0" HorizontalTextAlignment="Center"/>
+                <Entry x:Name="DireccionEntry" Placeholder="Dirección"/>
+                <Entry x:Name="TelefonoEntry" Placeholder="Teléfono" Keyboard="Telephone"/>
+                <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email"/>
+
+                <Label Text="Datos de Acceso" FontAttributes="Bold" Margin="0, 15, 0, 0" HorizontalTextAlignment="Center"/>
+                <Entry x:Name="UsuarioEntry" Placeholder="Usuario (Para Login)"/>
+                <Entry x:Name="ContrasenaEntry" Placeholder="Contraseña" IsPassword="True"/>
+                <Entry x:Name="ConfirmarContrasenaEntry" Placeholder="Confirmar Contraseña" IsPassword="True"/>
+
+                <Button Text="REGISTRAR" 
+                    Style="{StaticResource PrimaryButton}" 
+                    Clicked="OnRegisterClicked"/>
+
+                <Label x:Name="StatusLabel" 
+                   TextColor="Red" 
+                   HorizontalOptions="Center" 
+                   Margin="0, 10, 0, 0"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
