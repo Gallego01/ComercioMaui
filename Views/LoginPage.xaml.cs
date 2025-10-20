@@ -34,7 +34,11 @@ namespace ComercioMaui.Views
 
                 var mainPage = _serviceProvider.GetRequiredService<MainPage>();
 
-                Application.Current.MainPage = new NavigationPage(mainPage);
+                // Reemplaza la página principal actual (Login) por el AppShell
+                Application.Current.MainPage = new AppShell();
+
+                // Y navega a la MainPage dentro del Shell. El '///' es necesario para navegar al inicio del Shell.
+                await Shell.Current.GoToAsync("//MainPage");
             }
             else
             {

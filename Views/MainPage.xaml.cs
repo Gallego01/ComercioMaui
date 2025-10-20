@@ -1,24 +1,21 @@
-﻿namespace ComercioMaui
+﻿using ComercioMaui.Views;
+
+namespace ComercioMaui.Views
 {
+    // Asegúrate de que el namespace sea 'ComercioMaui.Views' para consistencia
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
         public MainPage()
         {
             InitializeComponent();
         }
 
-        private void OnCounterClicked(object? sender, EventArgs e)
+        // ⭐ IMPLEMENTACIÓN DEL MANEJADOR DE EVENTOS ⭐
+        private async void OnGoToAgregarProductoClicked(object sender, EventArgs e)
         {
-            count++;
-
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            // Navega a la ruta que registraste en AppShell.xaml.cs
+            await Shell.Current.GoToAsync(nameof(AgregarProductoPage));
         }
+
     }
 }

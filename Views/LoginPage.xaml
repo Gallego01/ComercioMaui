@@ -5,7 +5,7 @@
              Title="Inicio de Sesión">
 
     <ContentPage.Resources>
-        <!-- Estilo básico para el contenedor central -->
+        <!-- Contenedor central-->
         <Style TargetType="VerticalStackLayout">
             <Setter Property="BackgroundColor" Value="#80FFFFFF" />
             <Setter Property="Spacing" Value="15" />
@@ -13,7 +13,7 @@
             <Setter Property="MaximumWidthRequest" Value="400" />
             <Setter Property="HorizontalOptions" Value="Center" />
         </Style>
-        <!-- Estilos para los botones -->
+        <!-- Botones -->
         <Style x:Key="LoginButton" TargetType="Button">
             <Setter Property="BackgroundColor" Value="#007ACC" />
             <Setter Property="TextColor" Value="White" />

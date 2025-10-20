@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComercioMaui.Views.AgregarProductoPage"
+             Title="Agregar Nuevo Producto">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="25">
+
+            <Label Text="Detalles del Producto" 
+                   FontSize="Large" 
+                   FontAttributes="Bold" 
+                   HorizontalOptions="Center" 
+                   Margin="0,0,0,10"/>
+
+            <Label Text="Nombre del Producto" FontAttributes="Bold"/>
+            <Entry x:Name="NombreEntry" Placeholder="Ej: Monitor LED 27 pulgadas" />
+
+            <Label Text="Categoría" FontAttributes="Bold"/>
+            <Entry x:Name="CategoriaEntry" Placeholder="Ej: Electrónica / Hogar" />
+
+            <Label Text="Precio ($)" FontAttributes="Bold"/>
+            <Entry x:Name="PrecioEntry" Keyboard="Numeric" Placeholder="Ej: 150.99" />
+
+            <Label Text="Stock Actual" FontAttributes="Bold"/>
+            <Entry x:Name="StockEntry" Keyboard="Numeric" Placeholder="Ej: 50" />
+
+            <Label Text="Stock Mínimo (Alerta)" FontAttributes="Bold"/>
+            <Entry x:Name="StockMinimoEntry" Keyboard="Numeric" Placeholder="Ej: 10" />
+
+            <BoxView HeightRequest="20" />
+
+            <Button Text="Guardar Producto en Inventario" 
+                    Clicked="OnGuardarProductoClicked" 
+                    CornerRadius="8" 
+                    Padding="15"/>
+
+            <Label x:Name="StatusLabel" 
+                   TextColor="Red" 
+                   FontAttributes="Bold" 
+                   HorizontalOptions="Center" 
+                   Margin="0,10,0,0" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

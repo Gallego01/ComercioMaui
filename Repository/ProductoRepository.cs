@@ -1,5 +1,6 @@
-﻿using SQLite;
+﻿using System.ComponentModel.DataAnnotations;
 using ComercioMaui.Models;
+using SQLite;
 namespace ComercioMaui
 {
     public class ProductoRepository
@@ -25,19 +26,37 @@ namespace ComercioMaui
             connection.CreateTable<Producto>();
         }
 
-        public void AddProducto(Producto producto)
+        public bool AddProducto(Producto producto)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(producto.Nombre))
-                    throw new Exception("El nombre del producto es obligatorio.");
+                var context = new ValidationContext(producto, null, null);
+                var results = new List<ValidationResult>();
 
+                // 1. Validar todos los campos usando las DataAnnotations ([Required])
+                if (!Validator.TryValidateObject(producto, context, results, true))
+                {
+                    // Si la validación falla, StatusMessage contendrá todos los errores
+                    StatusMessage = string.Join(Environment.NewLine, results.ConvertAll(r => r.ErrorMessage));
+                    return false;
+                }
+
+                // 2. Insertar en la base de datos si la validación es exitosa
                 var result = connection.Insert(producto);
-                StatusMessage = $"{result} registro(s) agregado(s)";
+
+                if (result > 0)
+                {
+                    StatusMessage = "Producto agregado exitosamente.";
+                    return true;
+                }
+
+                StatusMessage = "No se pudo agregar el producto.";
+                return false;
             }
             catch (Exception ex)
             {
-                StatusMessage = $"Error: {ex.Message}";
+                StatusMessage = $"Error al agregar producto: {ex.Message}";
+                return false;
             }
         }
 
