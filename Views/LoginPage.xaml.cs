@@ -60,5 +60,7 @@ namespace ComercioMaui.Views
             StatusLabel.Text = string.Empty;
             App.CurrentUser = null;
         }
+
+        //pruebaa
     }
 }
