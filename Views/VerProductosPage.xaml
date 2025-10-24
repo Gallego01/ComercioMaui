@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComercioMaui.Views.VerProductosPage"
+             Title="Lista de Productos">
+
+    <VerticalStackLayout Padding="20" Spacing="10">
+        <Label Text="Inventario de Productos"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center" />
+
+        <CollectionView x:Name="ProductosCollection" SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BorderColor="#ccc" CornerRadius="10" Padding="10" Margin="5">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Nombre}" FontAttributes="Bold" FontSize="18"/>
+                            <Label Text="{Binding Categoria}" FontSize="14"/>
+                            <Label Text="{Binding Precio, StringFormat='Precio: ${0:F2}'}"/>
+                            <Label Text="{Binding Stock, StringFormat='Stock: {0}'}"/>
+                            <Label Text="{Binding StockMinimo, StringFormat='Stock Mínimo: {0}'}"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Text="Agregar Nuevo Producto"
+                Clicked="OnAgregarProductoClicked"
+                CornerRadius="10"
+                Padding="15"/>
+    </VerticalStackLayout>
+</ContentPage>

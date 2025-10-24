@@ -37,7 +37,8 @@
 
             <Button
                 Text="📋 Ver/Editar Inventario"
-                BackgroundColor="{StaticResource Secondary}"
+                Clicked="OnGoToVerProductosClicked"
+                BackgroundColor="{StaticResource Primary}"
                 TextColor="White"
                 CornerRadius="8"
                 Padding="15"

@@ -60,15 +60,20 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Context\**" />
+	  <Compile Remove="Context\**" />
+	  <EmbeddedResource Remove="Context\**" />
+	  <MauiCss Remove="Context\**" />
+	  <MauiXaml Remove="Context\**" />
+	  <None Remove="Context\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Data.Sqlite.Core" Version="9.0.10" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.5" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
 		<PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="3.0.2" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Context\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -79,6 +84,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\RegisterPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\VerProductosPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

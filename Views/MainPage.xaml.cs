@@ -17,5 +17,10 @@ namespace ComercioMaui.Views
             await Shell.Current.GoToAsync(nameof(AgregarProductoPage));
         }
 
+        private async void OnGoToVerProductosClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync(nameof(VerProductosPage));
+        }
+
     }
 }
