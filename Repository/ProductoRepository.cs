@@ -60,6 +60,24 @@ namespace ComercioMaui
             }
         }
 
+        public Producto GetProductoById(int id)
+        {
+            try
+            {
+                var producto = connection.Find<Producto>(id);
+                if (producto == null)
+                {
+                    StatusMessage = $"No se encontró producto con ID {id}.";
+                }
+                return producto;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = $"Error al obtener producto: {ex.Message}";
+                return null;
+            }
+        }
+
         public List<Producto> GetAllProductos()
         {
             try
