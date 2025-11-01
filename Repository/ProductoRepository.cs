@@ -81,11 +81,22 @@ namespace ComercioMaui
         {
             try
             {
-                return connection.Table<Producto>().ToList();
+                string query = @"
+                    SELECT 
+                        P.*,
+                        C.Nombre AS CategoriaNombre 
+                    FROM Producto P
+                    LEFT JOIN Categoria C ON P.CategoriaId = C.Id
+                    WHERE P.IsDeleted = 0; 
+                ";
+
+                var productos = connection.Query<Producto>(query);
+
+                return productos;
             }
             catch (Exception ex)
             {
-                StatusMessage = $"Error al obtener productos: {ex.Message}";
+                StatusMessage = $"Error al obtener productos con nombres de categoría: {ex.Message}";
                 return new List<Producto>();
             }
         }

@@ -58,6 +58,12 @@ namespace ComercioMaui
             builder.Services.AddTransient<RegisterPage>();
             builder.Services.AddTransient<MainPage>();
 
+            builder.Services.AddTransient<ComercioMaui.Views.VerProductosPage>(s =>
+                new ComercioMaui.Views.VerProductosPage(
+                    s.GetRequiredService<ComercioMaui.ProductoRepository>(),
+                    s.GetRequiredService<ComercioMaui.CategoriaRepository>()
+            ));
+
             return builder.Build();
         }
     }

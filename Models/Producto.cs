@@ -34,6 +34,6 @@ namespace ComercioMaui.Models
         public bool IsFavorito { get; set; } = false;
 
         [Ignore]
-        public string? CategoriaNombre { get; set; }
+        public string CategoriaNombre { get; set; }
     }
 }
