@@ -1,5 +1,5 @@
-﻿using SQLite;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using SQLite;
 
 namespace ComercioMaui.Models
 {
@@ -9,19 +9,31 @@ namespace ComercioMaui.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "El nombre es obligatorio")]
+        [Required]
         public string Nombre { get; set; }
 
-        [Required(ErrorMessage = "La categoria es obligatoria")]
-        public string Categoria { get; set; }
+        [Indexed]
+        [Required]
+        public int CategoriaId { get; set; }
 
-        [Required(ErrorMessage = "El precio es obligatorio")]
+        [Required]
         public float Precio { get; set; }
 
-        [Required(ErrorMessage = "El stock es obligatorio")]
+        [Required]
         public int Stock { get; set; }
 
-        [Required(ErrorMessage = "El stock minimo es obligatorio")]
+        [Required]
         public int StockMinimo { get; set; }
+
+        public bool IsDeleted { get; set; } = false;
+
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+        public DateTime UpdatedAt { get; set; } = DateTime.Now;
+
+        public bool IsFavorito { get; set; } = false;
+
+        [Ignore]
+        public string? CategoriaNombre { get; set; }
     }
 }

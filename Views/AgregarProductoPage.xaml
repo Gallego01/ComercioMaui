@@ -17,8 +17,30 @@
             <Entry x:Name="NombreEntry" Placeholder="Ej: Monitor LED 27 pulgadas" />
 
             <Label Text="Categoría" FontAttributes="Bold"/>
-            <Entry x:Name="CategoriaEntry" Placeholder="Ej: Electrónica / Hogar" />
 
+            <SearchBar x:Name="CategoriaSearchBar" 
+                       Placeholder="Buscar Categoría..."
+                       TextChanged="OnCategoriaSearchBarTextChanged" />
+
+            <VerticalStackLayout Spacing="0">
+
+                <CollectionView x:Name="CategoriasCollectionView"
+                                HeightRequest="150" 
+                                SelectionMode="Single"
+                                SelectionChanged="OnCategoriaSelectionChanged">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <HorizontalStackLayout Padding="10">
+                                <Label Text="{Binding Nombre}" FontSize="Small" />
+                            </HorizontalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Label x:Name="CategoriaSeleccionadaLabel"
+                       Text="Categoría seleccionada: Ninguna"/>
+            </VerticalStackLayout>
+            
             <Label Text="Precio ($)" FontAttributes="Bold"/>
             <Entry x:Name="PrecioEntry" Keyboard="Numeric" Placeholder="Ej: 150.99" />
 
@@ -36,10 +58,10 @@
                     Padding="15"/>
 
             <Label x:Name="StatusLabel" 
-                   TextColor="Red" 
-                   FontAttributes="Bold" 
-                   HorizontalOptions="Center" 
-                   Margin="0,10,0,0" />
+                    TextColor="Red" 
+                    FontAttributes="Bold" 
+                    HorizontalOptions="Center" 
+                    Margin="0,10,0,0" />
 
         </VerticalStackLayout>
     </ScrollView>

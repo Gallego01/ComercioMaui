@@ -9,7 +9,7 @@ namespace ComercioMaui.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "El nombre del rol es obligatorio")]
+        [Required]
         public string Nombre { get; set; }
     }
 }

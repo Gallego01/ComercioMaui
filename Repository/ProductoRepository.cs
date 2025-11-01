@@ -7,12 +7,14 @@ namespace ComercioMaui
     {
         private readonly string dbPath;
         private SQLiteConnection connection;
+        private readonly CategoriaRepository categoriaRepo;
 
         public string StatusMessage { get; private set; }
 
-        public ProductoRepository(string dbPath)
+        public ProductoRepository(string dbPath, CategoriaRepository categoriaRepo)
         {
             this.dbPath = dbPath;
+            this.categoriaRepo = categoriaRepo;
             SQLitePCL.Batteries_V2.Init();
             Init();
         }
@@ -33,15 +35,12 @@ namespace ComercioMaui
                 var context = new ValidationContext(producto, null, null);
                 var results = new List<ValidationResult>();
 
-                // 1. Validar todos los campos usando las DataAnnotations ([Required])
                 if (!Validator.TryValidateObject(producto, context, results, true))
                 {
-                    // Si la validación falla, StatusMessage contendrá todos los errores
                     StatusMessage = string.Join(Environment.NewLine, results.ConvertAll(r => r.ErrorMessage));
                     return false;
                 }
 
-                // 2. Insertar en la base de datos si la validación es exitosa
                 var result = connection.Insert(producto);
 
                 if (result > 0)

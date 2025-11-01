@@ -10,32 +10,32 @@ namespace ComercioMaui.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "El nombre es obligatorio")]
+        [Required]
         public string Nombre { get; set; }
 
-        [Required(ErrorMessage = "El apellido es obligatorio")]
+        [Required]
         public string Apellido { get; set; }
 
-        [Required(ErrorMessage = "El DNI es obligatorio")]
+        [Required]
         public string Dni { get; set; }
 
-        [Required(ErrorMessage = "La fecha de nacimiento es obligatoria")]
+        [Required]
         public DateTime FechaNacimiento { get; set; }
 
-        [Required(ErrorMessage = "La direccion es obligatoria")]
+        [Required]
         public string Direccion { get; set; }
 
-        [Required(ErrorMessage = "El telefono es obligatorio")]
+        [Required]
         public string Telefono { get; set; }
 
-        [Required(ErrorMessage = "El email es obligatorio")]
+        [Required]
         [EmailAddress(ErrorMessage = "El email no tiene un formato valido")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "El usuario es obligatorio")]
+        [Required]
         public string Usuario { get; set; }
 
-        [Required(ErrorMessage = "La contraseña es obligatoria")]
+        [Required]
         public string Contrasena { get; set; }
 
         public int? RolId { get; set; }

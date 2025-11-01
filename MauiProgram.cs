@@ -3,6 +3,7 @@ using ComercioMaui.Repository;
 using ComercioMaui.Views;
 using System;
 using System.IO;
+using ComercioMaui.Models;
 
 namespace ComercioMaui
 {
@@ -26,24 +27,33 @@ namespace ComercioMaui
 #endif
 
             // --- RUTA COMÚN DE BASE DE DATOS ---
-            var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "comercio.db3");
+            var dbPath = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "comercio.db3"
+            );
 
-            // --- REGISTRO DE DEPENDENCIAS DE REPOSITORIOS ---
+            // --- REGISTRO DE REPOSITORIOS ---
+            builder.Services.AddSingleton<RolRepository>(s =>
+                new RolRepository(dbPath)
+            );
 
-            // 1. RolRepository (solo dbPath)
-            builder.Services.AddSingleton<RolRepository>(s => new RolRepository(dbPath));
-
-            // 2. PersonaRepository (dbPath + RolRepository)
             builder.Services.AddSingleton<PersonaRepository>(s =>
             {
                 var rolRepo = s.GetRequiredService<RolRepository>();
                 return new PersonaRepository(dbPath, rolRepo);
             });
 
-            // 3. ProductoRepository (solo dbPath)
-            builder.Services.AddSingleton<ProductoRepository>(s => new ProductoRepository(dbPath));
+            builder.Services.AddSingleton<CategoriaRepository>(s =>
+                new CategoriaRepository(dbPath)
+            );
 
-            // --- REGISTRO DE VISTAS ---
+            builder.Services.AddSingleton<ProductoRepository>(s =>
+            {
+                var categoriaRepo = s.GetRequiredService<CategoriaRepository>();
+                return new ProductoRepository(dbPath, categoriaRepo);
+            });
+
+            // --- REGISTRO DE PÁGINAS / VISTAS ---
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<RegisterPage>();
             builder.Services.AddTransient<MainPage>();
