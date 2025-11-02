@@ -53,6 +53,24 @@
                 Padding="15"
                 HorizontalOptions="Fill" />
 
+            <Button
+                Text="Agregar / Borrar roles"
+                Clicked="OnGoToAgregarRolClicked"
+                BackgroundColor="{StaticResource Primary}"
+                TextColor="White"
+                CornerRadius="8"
+                Padding="15"
+                HorizontalOptions="Fill" />
+
+            <Button
+                Text="Asignar roles"
+                Clicked="OnGoToAsignarRolClicked"
+                BackgroundColor="{StaticResource Primary}"
+                TextColor="White"
+                CornerRadius="8"
+                Padding="15"
+                HorizontalOptions="Fill" />
+
             <BoxView HeightRequest="1" Color="{StaticResource Secondary}" Margin="0,15,0,5"/>
 
             <Label

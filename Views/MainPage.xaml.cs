@@ -26,5 +26,15 @@ namespace ComercioMaui.Views
         {
             await Shell.Current.GoToAsync(nameof(AgregarCategoriaPage));
         }
+
+        private async void OnGoToAgregarRolClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync(nameof(AgregarRolPage));
+        }
+
+        private async void OnGoToAsignarRolClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync(nameof(AsignarRolPage));
+        }
     }
 }

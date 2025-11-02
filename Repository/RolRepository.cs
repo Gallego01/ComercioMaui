@@ -77,6 +77,22 @@ namespace ComercioMaui.Repository
             }
         }
 
+        public Rol? GetRolById(int id)
+        {
+            try
+            {
+                var rol = connection.Find<Rol>(id);
+                if (rol == null)
+                    StatusMessage = "No se encontró el rol con ese ID.";
+                return rol;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = $"Error al obtener rol por ID: {ex.Message}";
+                return null;
+            }
+        }
+
         public bool UpdateRol(Rol rol)
         {
             try

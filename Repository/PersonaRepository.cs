@@ -66,13 +66,13 @@ namespace ComercioMaui.Repository
             }
         }
 
-        public Persona? GetPersonaById(int id)
+        public Persona? GetPersonaByDni(string dni)
         {
             try
             {
-                var persona = connection.Find<Persona>(id);
+                var persona = connection.Table<Persona>().FirstOrDefault(p => p.Dni == dni);
                 if (persona == null)
-                    StatusMessage = "No se encontro la persona.";
+                    StatusMessage = "No se encontró la persona con ese DNI.";
                 return persona;
             }
             catch (Exception ex)
@@ -118,7 +118,7 @@ namespace ComercioMaui.Repository
                     return true;
                 }
 
-                StatusMessage = "No se encontro la persona.";
+                StatusMessage = "No se encontró la persona.";
                 return false;
             }
             catch (Exception ex)
@@ -157,14 +157,13 @@ namespace ComercioMaui.Repository
             }
         }
 
-
         public bool RegistrarPersona(Persona persona)
         {
             try
             {
                 if (connection.Table<Persona>().Any(p => p.Usuario == persona.Usuario))
                 {
-                    StatusMessage = "El nombre de usuario ya esta en uso.";
+                    StatusMessage = "El nombre de usuario ya está en uso.";
                     return false;
                 }
 

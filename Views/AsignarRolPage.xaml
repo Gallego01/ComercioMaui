@@ -1,0 +1,46 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComercioMaui.Views.AsignarRolPage"
+             Title="Asignar Rol a Persona">
+
+    <VerticalStackLayout Spacing="15" Padding="30">
+
+        <Label Text="Asignar Rol a Persona"
+               FontSize="Title"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"/>
+
+        <Entry x:Name="DniEntry"
+               Placeholder="Ingrese DNI de la persona"
+               TextChanged="DniEntry_TextChanged"/>
+
+        <CollectionView x:Name="DniSuggestionsCollectionView"
+                        HeightRequest="150"
+                        SelectionMode="Single"
+                        SelectionChanged="DniSuggestionsCollectionView_SelectionChanged">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding Dni}" Padding="5"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Label x:Name="NombreLabel"/>
+        <Label x:Name="ApellidoLabel"/>
+        <Label x:Name="TelefonoLabel"/>
+        <Label x:Name="EmailLabel"/>
+        <Label x:Name="DireccionLabel"/>
+        <Label x:Name="RolLabel"/>
+
+        <Picker x:Name="RolPicker"
+                Title="Seleccione un rol"/>
+
+        <Button Text="Asignar Rol"
+                Clicked="OnAsignarRolClicked"
+                CornerRadius="10"/>
+
+        <Label x:Name="StatusLabel"
+               TextColor="Red"
+               HorizontalOptions="Center"/>
+    </VerticalStackLayout>
+</ContentPage>
