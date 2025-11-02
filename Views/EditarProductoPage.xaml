@@ -1,0 +1,39 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComercioMaui.Views.EditarProductoPage"
+             Title="Editar Producto">
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="15">
+
+            <!-- Nombre del producto -->
+            <Label Text="Nombre del producto" />
+            <Entry x:Name="NombreEntry" Placeholder="Ingrese nombre del producto" />
+
+            <!-- Precio -->
+            <Label Text="Precio" />
+            <Entry x:Name="PrecioEntry" Placeholder="Ingrese precio" Keyboard="Numeric" />
+
+            <!-- Categoría -->
+            <Label Text="Categoría" />
+            <Picker x:Name="CategoriaPicker" Title="Seleccionar categoría"
+                    ItemDisplayBinding="{Binding Nombre}" />
+
+            <!-- Stock -->
+            <Label Text="Stock" />
+            <Entry x:Name="StockEntry" Placeholder="Cantidad en stock" Keyboard="Numeric" />
+
+            <!-- Stock mínimo -->
+            <Label Text="Stock mínimo" />
+            <Entry x:Name="StockMinimoEntry" Placeholder="Cantidad mínima" Keyboard="Numeric" />
+
+            <Label x:Name="StatusLabel" TextColor="Red" />
+            <!-- Botón Guardar -->
+            <Button Text="Guardar Cambios"
+                    BackgroundColor="#2196F3"
+                    TextColor="White"
+                    Clicked="OnGuardarClicked" />
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

@@ -34,7 +34,7 @@
                 </Grid>
 
                 <CollectionView x:Name="ProductosCollection" 
-                                SelectionMode="None"  RemainingItemsThreshold="1"
+                                SelectionMode="Single"  RemainingItemsThreshold="1"
                                 ItemsUpdatingScrollMode="KeepItemsInView">
 
                     <CollectionView.ItemTemplate>
@@ -60,8 +60,10 @@
                 </CollectionView>
             </VerticalStackLayout>
         </ScrollView>
-        <Button Text="➕ Agregar Producto" 
-                Clicked="OnAgregarProductoClicked" 
-                Margin="0,20,0,0"/>
+        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+            <Button Text="Agregar Producto" Clicked="OnAgregarProductoClicked" />
+            <Button Text="Editar Producto" Clicked="OnEditarProductoClicked" />
+            <Button Text="Eliminar Producto" Clicked="OnEliminarProductoClicked" BackgroundColor="Red" TextColor="White"/>
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

@@ -18,6 +18,7 @@ namespace ComercioMaui
             Routing.RegisterRoute(nameof(AgregarProductoPage), typeof(AgregarProductoPage));
             Routing.RegisterRoute(nameof(VerProductosPage), typeof(VerProductosPage));
             Routing.RegisterRoute(nameof(AgregarCategoriaPage), typeof(AgregarCategoriaPage));
+            Routing.RegisterRoute(nameof(EditarProductoPage), typeof(EditarProductoPage));
 
             // Si tienes una página de listado de productos, regístrala también
             // Routing.RegisterRoute(nameof(ListarProductosPage), typeof(ListarProductosPage)); 
