@@ -1,4 +1,4 @@
-using ComercioMaui.Models;
+﻿using ComercioMaui.Models;
 using ComercioMaui.Repository;
 
 namespace ComercioMaui.Views
@@ -28,7 +28,7 @@ namespace ComercioMaui.Views
             if (authenticatedPersona != null)
             {
                 StatusLabel.TextColor = Color.FromHex("#28a745");
-                StatusLabel.Text = "Inicio de sesi�n exitoso.";
+                StatusLabel.Text = "Inicio de sesión exitoso.";
 
                 App.CurrentUser = authenticatedPersona;
 

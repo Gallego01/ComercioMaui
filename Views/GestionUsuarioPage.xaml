@@ -1,0 +1,54 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComercioMaui.Views.GestionUsuarioPage"
+             Title="Gestión de Roles">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="30">
+
+            <Label Text="Gestión de Roles"
+                   FontSize="Title"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+            <BoxView HeightRequest="1" Color="LightGray" />
+
+            <Button 
+                Text="Agregar Nueva Categoría" 
+                Clicked="OnGoToAgregarCategoriaClicked" 
+                BackgroundColor="{StaticResource Primary}"
+                TextColor="White"
+                CornerRadius="8"
+                Padding="15"
+                HorizontalOptions="Fill" />
+
+            <Button
+                Text="➕ Registrar Nuevo Producto"
+                Clicked="OnGoToAgregarProductoClicked"
+                BackgroundColor="{StaticResource Primary}"
+                TextColor="White"
+                CornerRadius="8"
+                Padding="15"
+                HorizontalOptions="Fill" />
+
+            <Button
+                Text="Agregar / Borrar Roles"
+                Clicked="OnGoToAgregarRolClicked"
+                BackgroundColor="{StaticResource Primary}"
+                TextColor="White"
+                CornerRadius="8"
+                Padding="15"
+                HorizontalOptions="Fill" />
+
+            <Button
+                Text="Asignar Roles"
+                Clicked="OnGoToAsignarRolClicked"
+                BackgroundColor="{StaticResource Primary}"
+                TextColor="White"
+                CornerRadius="8"
+                Padding="15"
+                HorizontalOptions="Fill" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

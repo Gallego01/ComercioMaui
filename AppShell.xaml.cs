@@ -17,11 +17,11 @@ namespace ComercioMaui
             // 2. Ruta de la nueva funcionalidad de Producto (MUY IMPORTANTE)
             Routing.RegisterRoute(nameof(AgregarProductoPage), typeof(AgregarProductoPage));
             Routing.RegisterRoute(nameof(VerProductosPage), typeof(VerProductosPage));
-            Routing.RegisterRoute(nameof(AgregarCategoriaPage), typeof(AgregarCategoriaPage));
             Routing.RegisterRoute(nameof(EditarProductoPage), typeof(EditarProductoPage));
+            Routing.RegisterRoute(nameof(GestionUsuarioPage), typeof(GestionUsuarioPage));
+            Routing.RegisterRoute(nameof(AgregarCategoriaPage), typeof(AgregarCategoriaPage));
             Routing.RegisterRoute(nameof(AgregarRolPage), typeof(AgregarRolPage));
             Routing.RegisterRoute(nameof(AsignarRolPage), typeof(AsignarRolPage));
-
             // Si tienes una página de listado de productos, regístrala también
             // Routing.RegisterRoute(nameof(ListarProductosPage), typeof(ListarProductosPage)); 
         }

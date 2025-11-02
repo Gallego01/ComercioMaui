@@ -1,4 +1,4 @@
-﻿using ComercioMaui.Views;
+﻿using ComercioMaui.Models;
 
 namespace ComercioMaui.Views
 {
@@ -22,19 +22,9 @@ namespace ComercioMaui.Views
             await Shell.Current.GoToAsync(nameof(VerProductosPage));
         }
 
-        private async void OnGoToAgregarCategoriaClicked(object sender, EventArgs e)
+        private async void OnGoToGestionUsuarioClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync(nameof(AgregarCategoriaPage));
-        }
-
-        private async void OnGoToAgregarRolClicked(object sender, EventArgs e)
-        {
-            await Shell.Current.GoToAsync(nameof(AgregarRolPage));
-        }
-
-        private async void OnGoToAsignarRolClicked(object sender, EventArgs e)
-        {
-            await Shell.Current.GoToAsync(nameof(AsignarRolPage));
+            await Shell.Current.GoToAsync(nameof(GestionUsuarioPage));
         }
     }
 }

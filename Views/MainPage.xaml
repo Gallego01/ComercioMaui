@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:ComercioMaui.Views"
              x:Class="ComercioMaui.Views.MainPage"
@@ -11,13 +10,6 @@
             Spacing="25"
             HorizontalOptions="FillAndExpand">
 
-            <Label
-                Text="Menú Principal de Gestión"
-                FontSize="Title"
-                FontAttributes="Bold"
-                HorizontalOptions="Center"
-                Margin="0,20,0,10" />
-
             <BoxView HeightRequest="1" Color="{StaticResource Secondary}" Margin="0,5,0,5"/>
 
             <Label
@@ -26,15 +18,6 @@
                 FontAttributes="Bold"
                 Margin="0,10,0,0"/>
 
-            <Button 
-                Text="Agregar Nueva Categoría" 
-                Clicked="OnGoToAgregarCategoriaClicked" 
-                BackgroundColor="{StaticResource Primary}"
-                TextColor="White"
-                CornerRadius="8"
-                Padding="15"
-                HorizontalOptions="Fill" />
-            
             <Button
                 Text="➕ Registrar Nuevo Producto"
                 Clicked="OnGoToAgregarProductoClicked"
@@ -53,24 +36,6 @@
                 Padding="15"
                 HorizontalOptions="Fill" />
 
-            <Button
-                Text="Agregar / Borrar roles"
-                Clicked="OnGoToAgregarRolClicked"
-                BackgroundColor="{StaticResource Primary}"
-                TextColor="White"
-                CornerRadius="8"
-                Padding="15"
-                HorizontalOptions="Fill" />
-
-            <Button
-                Text="Asignar roles"
-                Clicked="OnGoToAsignarRolClicked"
-                BackgroundColor="{StaticResource Primary}"
-                TextColor="White"
-                CornerRadius="8"
-                Padding="15"
-                HorizontalOptions="Fill" />
-
             <BoxView HeightRequest="1" Color="{StaticResource Secondary}" Margin="0,15,0,5"/>
 
             <Label
@@ -81,6 +46,7 @@
 
             <Button
                 Text="👤 Gestión de Usuarios"
+                Clicked="OnGoToGestionUsuarioClicked"
                 BackgroundColor="Gray"
                 TextColor="White"
                 CornerRadius="8"

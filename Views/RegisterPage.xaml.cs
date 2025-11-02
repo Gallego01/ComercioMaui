@@ -69,6 +69,22 @@ namespace ComercioMaui.Views
                 return;
             }
 
+            // Validar selección de rol
+            if (RolPicker.SelectedIndex < 0)
+            {
+                StatusLabel.Text = "Debe seleccionar un rol.";
+                return;
+            }
+
+            // Asignar RolId según selección
+            int rolId = RolPicker.SelectedIndex switch
+            {
+                0 => 1, // Cliente
+                1 => 2, // Empleado
+                2 => 3, // Encargado
+                _ => 1
+            };
+
             var nuevaPersona = new Persona
             {
                 Nombre = nombre,
@@ -80,7 +96,7 @@ namespace ComercioMaui.Views
                 Email = email,
                 Usuario = usuario,
                 Contrasena = contrasena,
-                RolId = null
+                RolId = rolId
             };
 
             try
