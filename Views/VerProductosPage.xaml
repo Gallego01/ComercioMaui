@@ -60,7 +60,7 @@
                 </CollectionView>
             </VerticalStackLayout>
         </ScrollView>
-        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+        <HorizontalStackLayout x:Name="ProductosButtonsLayout" Spacing="10" HorizontalOptions="Center">
             <Button Text="Agregar Producto" Clicked="OnAgregarProductoClicked" />
             <Button Text="Editar Producto" Clicked="OnEditarProductoClicked" />
             <Button Text="Eliminar Producto" Clicked="OnEliminarProductoClicked" BackgroundColor="Red" TextColor="White"/>

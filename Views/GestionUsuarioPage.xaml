@@ -23,7 +23,7 @@
                 HorizontalOptions="Fill" />
 
             <Button
-                Text="➕ Registrar Nuevo Producto"
+                Text="Registrar Nuevo Producto"
                 Clicked="OnGoToAgregarProductoClicked"
                 BackgroundColor="{StaticResource Primary}"
                 TextColor="White"

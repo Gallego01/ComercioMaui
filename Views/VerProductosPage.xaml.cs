@@ -23,6 +23,11 @@ namespace ComercioMaui.Views
         {
             base.OnAppearing();
             CargarCategoriasYProductos();
+
+            if (App.CurrentUser != null)
+            {
+                ProductosButtonsLayout.IsVisible = App.CurrentUser.RolId == 2 || App.CurrentUser.RolId == 3;
+            }
         }
 
         private void CargarCategoriasYProductos()
