@@ -114,26 +114,25 @@ namespace ComercioMaui
             }
         }
 
-        public void DeleteCategoria(int id)
+        public bool DeleteCategoria(int id)
         {
             try
             {
-                var categoria = connection.Find<Categoria>(id);
+                var categoria = connection.Table<Categoria>().FirstOrDefault(c => c.Id == id);
                 if (categoria != null)
                 {
-                    categoria.IsDeleted = true;
-                    categoria.UpdatedAt = DateTime.Now;
-                    connection.Update(categoria);
-                    StatusMessage = "Categoría eliminada lógicamente.";
+                    connection.Delete(categoria);
+                    StatusMessage = "Categoría eliminada correctamente.";
+                    return true;
                 }
-                else
-                {
-                    StatusMessage = "Categoría no encontrada.";
-                }
+
+                StatusMessage = "No se encontró la categoría.";
+                return false;
             }
             catch (Exception ex)
             {
-                StatusMessage = $"Error al eliminar categoría: {ex.Message}";
+                StatusMessage = $"Error al eliminar la categoría: {ex.Message}";
+                return false;
             }
         }
 

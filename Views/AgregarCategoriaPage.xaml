@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:conv="clr-namespace:ComercioMaui.Converters"
              x:Class="ComercioMaui.Views.AgregarCategoriaPage"
              Title="Agregar Nueva Categoría">
+
+    <ContentPage.Resources>
+        <conv:BoolToHabilitarTextConverter x:Key="BoolToHabilitarTextConverter" />
+        <conv:BoolToColorConverter x:Key="BoolToColorConverter" />
+        <conv:BoolToDisabledBackgroundConverter x:Key="BoolToDisabledBackgroundConverter" />
+        <conv:BoolToDisabledTextColorConverter x:Key="BoolToDisabledTextColorConverter" />
+    </ContentPage.Resources>
 
     <VerticalStackLayout Spacing="25" Padding="30" VerticalOptions="Center">
 
@@ -31,6 +39,52 @@
             TextColor="Red"
             HorizontalOptions="Center"
             FontAttributes="Italic"/>
+
+        <Label Text="Categorías existentes:" 
+               FontAttributes="Bold" 
+               Margin="0,20,0,0"/>
+
+        <CollectionView x:Name="CategoriasCollectionView"
+                        HeightRequest="350"
+                        Margin="0,5,0,0">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BorderColor="LightGray"
+                           CornerRadius="5"
+                           Padding="10"
+                           Margin="0,5,0,0"
+                           BackgroundColor="{Binding IsDeleted, Converter={StaticResource BoolToDisabledBackgroundConverter}}">
+
+                        <Grid ColumnDefinitions="*, Auto, Auto" ColumnSpacing="10">
+
+                            <Label Text="{Binding Nombre}" 
+                                   FontSize="Medium"
+                                   TextColor="{Binding IsDeleted, Converter={StaticResource BoolToDisabledTextColorConverter}}"
+                                   VerticalOptions="Center"/>
+
+                            <Button Text="{Binding IsDeleted, Converter={StaticResource BoolToHabilitarTextConverter}}"
+                                    BackgroundColor="{Binding IsDeleted, Converter={StaticResource BoolToColorConverter}}"
+                                    TextColor="White"
+                                    CornerRadius="5"
+                                    Padding="5"
+                                    Grid.Column="1"
+                                    CommandParameter="{Binding}"
+                                    Clicked="OnToggleHabilitadoClicked"/>
+
+                            <Button Text="Borrar"
+                                    BackgroundColor="DarkRed"
+                                    TextColor="White"
+                                    CornerRadius="5"
+                                    Padding="5"
+                                    Grid.Column="2"
+                                    CommandParameter="{Binding}"
+                                    Clicked="OnBorrarPermanentementeClicked"/>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
     </VerticalStackLayout>
 </ContentPage>
