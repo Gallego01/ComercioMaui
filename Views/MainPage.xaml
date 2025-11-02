@@ -19,15 +19,6 @@
                 Margin="0,10,0,0"/>
 
             <Button
-                Text="➕ Registrar Nuevo Producto"
-                Clicked="OnGoToAgregarProductoClicked"
-                BackgroundColor="{StaticResource Primary}"
-                TextColor="White"
-                CornerRadius="8"
-                Padding="15"
-                HorizontalOptions="Fill" />
-
-            <Button
                 Text="📋 Ver/Editar Inventario"
                 Clicked="OnGoToVerProductosClicked"
                 BackgroundColor="{StaticResource Primary}"
@@ -36,23 +27,32 @@
                 Padding="15"
                 HorizontalOptions="Fill" />
 
-            <BoxView HeightRequest="1" Color="{StaticResource Secondary}" Margin="0,15,0,5"/>
+            <VerticalStackLayout x:Name="UsuariosRolesLayout">
+                <BoxView HeightRequest="1" Color="{StaticResource Secondary}" Margin="0,15,0,5"/>
 
-            <Label
-                Text="Gestión de Usuarios y Roles"
-                FontSize="Medium"
-                FontAttributes="Bold"
-                Margin="0,10,0,0"/>
+                <Label Text="Gestión de Usuarios y Roles"
+                       FontSize="Medium"
+                       FontAttributes="Bold"
+                       Margin="0,10,0,0"/>
+
+                <Button Text="👤 Gestión de Usuarios"
+                        Clicked="OnGoToGestionUsuarioClicked"
+                        BackgroundColor="Gray"
+                        TextColor="White"
+                        CornerRadius="8"
+                        Padding="15"
+                        HorizontalOptions="Fill"/>
+            </VerticalStackLayout>
 
             <Button
-                Text="👤 Gestión de Usuarios"
-                Clicked="OnGoToGestionUsuarioClicked"
-                BackgroundColor="Gray"
-                TextColor="White"
-                CornerRadius="8"
-                Padding="15"
-                HorizontalOptions="Fill" />
-
+                    Text="🔒 Cerrar Sesión"
+                    Clicked="OnLogoutClicked"
+                    BackgroundColor="Red"
+                    TextColor="White"
+                    CornerRadius="8"
+                    Padding="15"
+                    HorizontalOptions="Fill"
+                    Margin="0,20,0,0"/>
         </VerticalStackLayout>
     </ScrollView>
 

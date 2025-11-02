@@ -10,13 +10,17 @@ namespace ComercioMaui.Views
             InitializeComponent();
         }
 
-        // ⭐ IMPLEMENTACIÓN DEL MANEJADOR DE EVENTOS ⭐
-        private async void OnGoToAgregarProductoClicked(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
-            // Navega a la ruta que registraste en AppShell.xaml.cs
-            await Shell.Current.GoToAsync(nameof(AgregarProductoPage));
+            base.OnAppearing();
+
+            if (App.CurrentUser != null)
+            {
+                UsuariosRolesLayout.IsVisible = App.CurrentUser.RolId == 2 || App.CurrentUser.RolId == 3;
+            }
         }
 
+        // ⭐ IMPLEMENTACIÓN DEL MANEJADOR DE EVENTOS ⭐
         private async void OnGoToVerProductosClicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync(nameof(VerProductosPage));
@@ -25,6 +29,13 @@ namespace ComercioMaui.Views
         private async void OnGoToGestionUsuarioClicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync(nameof(GestionUsuarioPage));
+        }
+
+        private async void OnLogoutClicked(object sender, EventArgs e)
+        {
+            App.CurrentUser = null;
+
+            await Shell.Current.GoToAsync("//LoginPage");
         }
     }
 }

@@ -56,7 +56,6 @@ namespace ComercioMaui.Views
             UsuarioEntry.Text = string.Empty;
             ContrasenaEntry.Text = string.Empty;
             StatusLabel.Text = string.Empty;
-            App.CurrentUser = null;
         }
     }
 }
