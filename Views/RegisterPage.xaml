@@ -6,70 +6,85 @@
              BackgroundColor="#F4F7F9">
 
     <ContentPage.Resources>
-        <Style TargetType="VerticalStackLayout">
-            <Setter Property="BackgroundColor" Value="#80FFFFFF" />
-            <Setter Property="Spacing" Value="10" />
-            <Setter Property="Margin" Value="20" />
-            <Setter Property="HorizontalOptions" Value="Center" />
-            <Setter Property="MaximumWidthRequest" Value="600" />
-            <Setter Property="Shadow">
-                <Setter.Value>
-                    <Shadow Brush="Black" Radius="10" Offset="4,4" Opacity="0.3"/>
-                </Setter.Value>
-            </Setter>
-        </Style>
         <Style TargetType="Entry">
             <Setter Property="PlaceholderColor" Value="#AAAAAA" />
-            <Setter Property="Margin" Value="0, 0, 0, 5" />
+            <Setter Property="Margin" Value="0,0,0,10" />
             <Setter Property="Keyboard" Value="Text" />
+            <Setter Property="HeightRequest" Value="40" />
         </Style>
         <Style x:Key="PrimaryButton" TargetType="Button">
             <Setter Property="BackgroundColor" Value="#007ACC" />
             <Setter Property="TextColor" Value="White" />
             <Setter Property="CornerRadius" Value="8" />
-            <Setter Property="Margin" Value="0, 15, 0, 5" />
+            <Setter Property="Margin" Value="0,20,0,10" />
+            <Setter Property="HeightRequest" Value="45" />
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="Medium" />
+            <Setter Property="TextColor" Value="#333333"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
         </Style>
     </ContentPage.Resources>
-
     <Grid>
         <Image Source="login.jpg"
-       Aspect="AspectFill"
-       HorizontalOptions="Fill"
-       VerticalOptions="Fill" />
+               Aspect="AspectFill"
+               HorizontalOptions="Fill"
+               VerticalOptions="Fill" />
         <ScrollView>
-            <VerticalStackLayout>
+            <VerticalStackLayout Padding="20" Spacing="10" HorizontalOptions="Center" WidthRequest="400">
 
                 <Label Text="REGISTRO DE NUEVO CLIENTE" 
                    FontSize="Title" 
                    FontAttributes="Bold"
                    HorizontalOptions="Center"
-                   Margin="0, 10, 0, 20"
-                   TextColor="#007ACC"/>
+                   TextColor="#007ACC"
+                   Margin="0,10,0,20"/>
 
-                <Label Text="Datos Personales" FontAttributes="Bold" Margin="0, 10, 0, 0" HorizontalTextAlignment="Center"/>
-                <Entry x:Name="NombreEntry" Placeholder="Nombre"/>
-                <Entry x:Name="ApellidoEntry" Placeholder="Apellido"/>
-                <Entry x:Name="DniEntry" Placeholder="DNI" Keyboard="Numeric"/>
-                <DatePicker x:Name="FechaNacimientoPicker" Format="dd/MM/yyyy" Date="2000/01/01"/>
+                <Label Text="Datos Personales" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,10"/>
 
-                <Label Text="Contacto" FontAttributes="Bold" Margin="0, 15, 0, 0" HorizontalTextAlignment="Center"/>
-                <Entry x:Name="DireccionEntry" Placeholder="Dirección"/>
-                <Entry x:Name="TelefonoEntry" Placeholder="Teléfono" Keyboard="Telephone"/>
-                <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email"/>
+                <Grid ColumnDefinitions="120, *" RowDefinitions="40,40,40,50" ColumnSpacing="10" RowSpacing="10">
+                    <Label Text="Nombre:" Grid.Row="0" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry x:Name="NombreEntry" Grid.Row="0" Grid.Column="1" Placeholder="Ingrese nombre" HeightRequest="40"/>
 
-                <Label Text="Datos de Acceso" FontAttributes="Bold" Margin="0, 15, 0, 0" HorizontalTextAlignment="Center"/>
-                <Entry x:Name="UsuarioEntry" Placeholder="Usuario (Para Login)"/>
-                <Entry x:Name="ContrasenaEntry" Placeholder="Contraseña" IsPassword="True"/>
-                <Entry x:Name="ConfirmarContrasenaEntry" Placeholder="Confirmar Contraseña" IsPassword="True"/>
+                    <Label Text="Apellido:" Grid.Row="1" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry x:Name="ApellidoEntry" Grid.Row="1" Grid.Column="1" Placeholder="Ingrese apellido" HeightRequest="40"/>
 
-                <Button Text="REGISTRAR" 
-                    Style="{StaticResource PrimaryButton}" 
-                    Clicked="OnRegisterClicked"/>
+                    <Label Text="DNI:" Grid.Row="2" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry x:Name="DniEntry" Grid.Row="2" Grid.Column="1" Placeholder="Ingrese DNI" Keyboard="Numeric" HeightRequest="40"/>
 
-                <Label x:Name="StatusLabel" 
-                   TextColor="Red" 
-                   HorizontalOptions="Center" 
-                   Margin="0, 10, 0, 0"/>
+                    <Label Text="Fecha de nacimiento:" Grid.Row="3" Grid.Column="0" VerticalOptions="Center"/>
+                    <DatePicker x:Name="FechaNacimientoPicker" Grid.Row="3" Grid.Column="1" Format="dd/MM/yyyy" Date="2000-01-01" HeightRequest="40"/>
+                </Grid>
+
+                <Label Text="Contacto" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,15,0,10"/>
+
+                <Grid ColumnDefinitions="120, *" RowDefinitions="40,40,40" ColumnSpacing="10" RowSpacing="10">
+                    <Label Text="Dirección:" Grid.Row="0" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry x:Name="DireccionEntry" Grid.Row="0" Grid.Column="1" Placeholder="Ingrese dirección" HeightRequest="40"/>
+
+                    <Label Text="Teléfono:" Grid.Row="1" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry x:Name="TelefonoEntry" Grid.Row="1" Grid.Column="1" Placeholder="Ingrese teléfono" Keyboard="Telephone" HeightRequest="40"/>
+
+                    <Label Text="Email:" Grid.Row="2" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry x:Name="EmailEntry" Grid.Row="2" Grid.Column="1" Placeholder="Ingrese email" Keyboard="Email" HeightRequest="40"/>
+                </Grid>
+
+                <Label Text="Datos de Acceso" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,15,0,10"/>
+
+                <Grid ColumnDefinitions="120, *" RowDefinitions="40,40,40" ColumnSpacing="10" RowSpacing="10">
+                    <Label Text="Usuario:" Grid.Row="0" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry x:Name="UsuarioEntry" Grid.Row="0" Grid.Column="1" Placeholder="Usuario para login" HeightRequest="40"/>
+
+                    <Label Text="Contraseña:" Grid.Row="1" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry x:Name="ContrasenaEntry" Grid.Row="1" Grid.Column="1" Placeholder="Ingrese contraseña" IsPassword="True" HeightRequest="40"/>
+
+                    <Label Text="Confirmar:" Grid.Row="2" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry x:Name="ConfirmarContrasenaEntry" Grid.Row="2" Grid.Column="1" Placeholder="Confirmar contraseña" IsPassword="True" HeightRequest="40"/>
+                </Grid>
+
+                <Button Text="REGISTRAR" Style="{StaticResource PrimaryButton}" Clicked="OnRegisterClicked"/>
+
+                <Label x:Name="StatusLabel" TextColor="Red" HorizontalOptions="Center" Margin="0,10,0,0" />
 
             </VerticalStackLayout>
         </ScrollView>

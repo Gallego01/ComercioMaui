@@ -34,15 +34,13 @@ namespace ComercioMaui.Views
 
                 var mainPage = _serviceProvider.GetRequiredService<MainPage>();
 
-                // Reemplaza la página principal actual (Login) por el AppShell
                 Application.Current.MainPage = new AppShell();
 
-                // Y navega a la MainPage dentro del Shell. El '///' es necesario para navegar al inicio del Shell.
                 await Shell.Current.GoToAsync("//MainPage");
             }
             else
             {
-                StatusLabel.Text = _personaRepo.StatusMessage ?? "Usuario o contraseña incorrectos.";
+                StatusLabel.Text = _personaRepo.StatusMessage;
             }
         }
 
@@ -60,7 +58,5 @@ namespace ComercioMaui.Views
             StatusLabel.Text = string.Empty;
             App.CurrentUser = null;
         }
-
-        //pruebaa
     }
 }

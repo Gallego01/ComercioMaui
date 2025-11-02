@@ -19,14 +19,14 @@ namespace ComercioMaui.Views
         {
             StatusLabel.Text = string.Empty;
 
-            string nombre = NombreEntry.Text;
-            string apellido = ApellidoEntry.Text;
-            string dni = DniEntry.Text;
+            string nombre = NombreEntry.Text?.Trim();
+            string apellido = ApellidoEntry.Text?.Trim();
+            string dni = DniEntry.Text?.Trim();
             DateTime fechaNacimiento = FechaNacimientoPicker.Date;
-            string direccion = DireccionEntry.Text;
-            string telefono = TelefonoEntry.Text;
-            string email = EmailEntry.Text;
-            string usuario = UsuarioEntry.Text;
+            string direccion = DireccionEntry.Text?.Trim();
+            string telefono = TelefonoEntry.Text?.Trim();
+            string email = EmailEntry.Text?.Trim();
+            string usuario = UsuarioEntry.Text?.Trim();
             string contrasena = ContrasenaEntry.Text;
             string confirmarContrasena = ConfirmarContrasenaEntry.Text;
 
@@ -36,6 +36,30 @@ namespace ComercioMaui.Views
                 string.IsNullOrWhiteSpace(usuario) || string.IsNullOrWhiteSpace(contrasena))
             {
                 StatusLabel.Text = "Todos los campos son obligatorios.";
+                return;
+            }
+
+            if (int.TryParse(nombre, out _) || int.TryParse(apellido, out _))
+            {
+                StatusLabel.Text = "El nombre y apellido no pueden ser números.";
+                return;
+            }
+
+            if (!email.Contains("@"))
+            {
+                StatusLabel.Text = "El email debe contener '@'.";
+                return;
+            }
+
+            if (!long.TryParse(dni, out _))
+            {
+                StatusLabel.Text = "El DNI debe contener solo números.";
+                return;
+            }
+
+            if (!long.TryParse(telefono, out _))
+            {
+                StatusLabel.Text = "El teléfono debe contener solo números.";
                 return;
             }
 
@@ -66,7 +90,6 @@ namespace ComercioMaui.Views
                 if (success)
                 {
                     await DisplayAlert("Éxito", "Registro completado. Ahora puede iniciar sesión.", "OK");
-
                     await Navigation.PopAsync();
                 }
                 else

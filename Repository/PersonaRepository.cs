@@ -133,9 +133,21 @@ namespace ComercioMaui.Repository
             try
             {
                 var persona = connection.Table<Persona>()
-                    .FirstOrDefault(p => p.Usuario == usuario && p.Contrasena == contrasena);
+                    .FirstOrDefault(p => p.Usuario == usuario);
 
-                StatusMessage = persona != null ? "Inicio de sesion exitosa." : "Usuario o contraseña incorrectos.";
+                if (persona == null)
+                {
+                    StatusMessage = "Usuario no registrado.";
+                    return null;
+                }
+
+                if (persona.Contrasena != contrasena)
+                {
+                    StatusMessage = "Contraseña incorrecta.";
+                    return null;
+                }
+
+                StatusMessage = "Inicio de sesión exitoso.";
                 return persona;
             }
             catch (Exception ex)
@@ -144,6 +156,7 @@ namespace ComercioMaui.Repository
                 return null;
             }
         }
+
 
         public bool RegistrarPersona(Persona persona)
         {

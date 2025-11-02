@@ -18,7 +18,7 @@ namespace ComercioMaui.Views
 
         private async void OnGuardarClicked(object sender, EventArgs e)
         {
-            string nombre = NombreCategoriaEntry.Text?.Trim();
+            string nombre = NombreCategoriaEntry.Text?.ToUpper().Trim();
 
             if (string.IsNullOrWhiteSpace(nombre))
             {
