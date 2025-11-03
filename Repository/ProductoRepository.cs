@@ -41,6 +41,10 @@ namespace ComercioMaui
                     return false;
                 }
 
+                DateTime now = DateTime.Now;
+                producto.CreatedAt = now;
+                producto.UpdatedAt = now;
+
                 var result = connection.Insert(producto);
 
                 if (result > 0)
@@ -119,6 +123,9 @@ namespace ComercioMaui
         {
             try
             {
+                // ⭐ Auditoría: Actualizar la fecha de modificación antes de guardar ⭐
+                producto.UpdatedAt = DateTime.Now;
+
                 connection.Update(producto);
             }
             catch (Exception ex)

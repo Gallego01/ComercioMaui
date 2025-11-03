@@ -25,12 +25,16 @@
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1.5*" />
+                        <ColumnDefinition Width="1.5*" />
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Column="0" Text="Producto" FontAttributes="Bold" FontSize="Small" HorizontalOptions="Center"/>
                     <Label Grid.Column="1" Text="Precio" FontAttributes="Bold" FontSize="Small" HorizontalOptions="Center"/>
                     <Label Grid.Column="2" Text="Stock" FontAttributes="Bold" FontSize="Small" HorizontalOptions="Center"/>
                     <Label Grid.Column="3" Text="Mínimo" FontAttributes="Bold" FontSize="Small" HorizontalOptions="Center"/>
+                    <Label Grid.Column="4" Text="Creado" FontAttributes="Bold" FontSize="Micro" HorizontalOptions="Center"/>
+                    <Label Grid.Column="5" Text="Modif." FontAttributes="Bold" FontSize="Micro" HorizontalOptions="Center"/>
                 </Grid>
 
                 <CollectionView x:Name="ProductosCollection" 
@@ -45,6 +49,8 @@
                                     <ColumnDefinition Width="1*" />
                                     <ColumnDefinition Width="1*" />
                                     <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1.5*" />
+                                    <ColumnDefinition Width="1.5*" />
                                 </Grid.ColumnDefinitions>
 
                                 <VerticalStackLayout Grid.Column="0">
@@ -54,6 +60,18 @@
                                 <Label Grid.Column="1" Text="{Binding Precio, StringFormat='{0:C}'}" TextColor="Green" FontSize="Micro" HorizontalOptions="Center" VerticalOptions="Center"/>
                                 <Label Grid.Column="2" Text="{Binding Stock}" FontSize="Micro" HorizontalOptions="Center" VerticalOptions="Center"/>
                                 <Label Grid.Column="3" Text="{Binding StockMinimo}" FontSize="Micro" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+                                <Label Grid.Column="4" 
+                                       Text="{Binding CreatedAt, StringFormat='{0:dd/MM/yy HH:mm}'}" 
+                                       FontSize="Micro" 
+                                       HorizontalOptions="Center" 
+                                       VerticalOptions="Center"/>
+                                <Label Grid.Column="5" 
+                                       Text="{Binding UpdatedAt, StringFormat='{0:dd/MM/yy HH:mm}'}" 
+                                       FontSize="Micro" 
+                                       HorizontalOptions="Center" 
+                                       VerticalOptions="Center"/>
+
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
