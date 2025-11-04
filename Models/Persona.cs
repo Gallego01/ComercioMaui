@@ -17,6 +17,7 @@ namespace ComercioMaui.Models
         public string Apellido { get; set; }
 
         [Required]
+        [Unique]
         public string Dni { get; set; }
 
         [Required]

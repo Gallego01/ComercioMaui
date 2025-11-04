@@ -83,7 +83,7 @@
                     <Entry x:Name="ConfirmarContrasenaEntry" Grid.Row="2" Grid.Column="1" Placeholder="Confirmar contraseña" IsPassword="True" HeightRequest="40"/>
                 </Grid>
 
-                <!-- Picker de rol -->
+
                 <Label Text="Seleccionar rol (solo desarrollo)" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,15,0,5"/>
                 <Picker x:Name="RolPicker" BackgroundColor="#F0F0F0" Title="Seleccione un rol">
                     <Picker.Items>
