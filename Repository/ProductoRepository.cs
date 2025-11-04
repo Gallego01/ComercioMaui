@@ -123,7 +123,6 @@ namespace ComercioMaui
         {
             try
             {
-                // ⭐ Auditoría: Actualizar la fecha de modificación antes de guardar ⭐
                 producto.UpdatedAt = DateTime.Now;
 
                 connection.Update(producto);
@@ -131,6 +130,31 @@ namespace ComercioMaui
             catch (Exception ex)
             {
                 StatusMessage = $"Error al actualizar: {ex.Message}";
+            }
+        }
+
+        public void ToggleFavorito(int id, bool isFavorito)
+        {
+            try
+            {
+
+                var producto = connection.Find<Producto>(id);
+                if (producto != null)
+                {
+                    producto.IsFavorito = isFavorito;
+
+                    producto.UpdatedAt = DateTime.Now;
+                    connection.Update(producto);
+                    StatusMessage = $"Producto {producto.Nombre} actualizado.";
+                }
+                else
+                {
+                    StatusMessage = $"Producto con ID {id} no encontrado.";
+                }
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = $"Error al marcar/desmarcar favorito: {ex.Message}";
             }
         }
     }

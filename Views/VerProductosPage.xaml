@@ -16,6 +16,14 @@
                 SelectedIndexChanged="OnCategoriaFilterChanged" />
         <BoxView HeightRequest="1" Color="LightGray" Margin="0,10,0,10"/>
 
+        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+            <Switch x:Name="FavoritosSwitch" 
+                    Toggled="OnFavoritosSwitchToggled"
+                    VerticalOptions="Center"/>
+            <Label Text="Mostrar solo favoritos" 
+                   VerticalOptions="Center" 
+                   FontSize="Small"/>
+        </HorizontalStackLayout>
         <ScrollView>
             <VerticalStackLayout>
 
@@ -27,6 +35,7 @@
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="1.5*" />
                         <ColumnDefinition Width="1.5*" />
+                        <ColumnDefinition Width="0.5*" />
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Column="0" Text="Producto" FontAttributes="Bold" FontSize="Small" HorizontalOptions="Center"/>
@@ -35,6 +44,7 @@
                     <Label Grid.Column="3" Text="Mínimo" FontAttributes="Bold" FontSize="Small" HorizontalOptions="Center"/>
                     <Label Grid.Column="4" Text="Creado" FontAttributes="Bold" FontSize="Micro" HorizontalOptions="Center"/>
                     <Label Grid.Column="5" Text="Modif." FontAttributes="Bold" FontSize="Micro" HorizontalOptions="Center"/>
+                    <Label Grid.Column="6" Text="Fav" FontAttributes="Bold" FontSize="Micro" HorizontalOptions="Center"/>
                 </Grid>
 
                 <CollectionView x:Name="ProductosCollection" 
@@ -51,6 +61,7 @@
                                     <ColumnDefinition Width="1*" />
                                     <ColumnDefinition Width="1.5*" />
                                     <ColumnDefinition Width="1.5*" />
+                                    <ColumnDefinition Width="0.5*" />
                                 </Grid.ColumnDefinitions>
 
                                 <VerticalStackLayout Grid.Column="0">
@@ -72,6 +83,25 @@
                                        HorizontalOptions="Center" 
                                        VerticalOptions="Center"/>
 
+                                <ImageButton Grid.Column="6"
+                                             Clicked="OnToggleFavoritoClicked"
+                                             VerticalOptions="Center"
+                                             HorizontalOptions="Center"
+                                             HeightRequest="20"
+                                             WidthRequest="20">
+                                    <ImageButton.Triggers>
+                                        <DataTrigger TargetType="ImageButton"
+                                                     Binding="{Binding IsFavorito}"
+                                                     Value="True">
+                                            <Setter Property="Source" Value="star_filled.png" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="ImageButton"
+                                                     Binding="{Binding IsFavorito}"
+                                                     Value="False">
+                                            <Setter Property="Source" Value="star_empty.png" />
+                                        </DataTrigger>
+                                    </ImageButton.Triggers>
+                                </ImageButton>
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

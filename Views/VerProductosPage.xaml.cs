@@ -1,4 +1,5 @@
 ﻿using ComercioMaui.Models;
+// using ComercioMaui.Repositories; // <<-- ELIMINADA O COMENTADA: CAUSA EL ERROR CS0234
 using Microsoft.Maui.Controls;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace ComercioMaui.Views
         private readonly ProductoRepository _productoRepo;
         private readonly CategoriaRepository _categoriaRepo;
         private List<Producto> _todosLosProductos;
+
 
         public VerProductosPage(ProductoRepository productoRepo, CategoriaRepository categoriaRepo)
         {
@@ -32,20 +34,17 @@ namespace ComercioMaui.Views
 
         private void CargarCategoriasYProductos()
         {
-            List<Categoria> categorias = _categoriaRepo.GetAllCategorias(false);
 
+            List<Categoria> categorias = _categoriaRepo.GetAllCategorias(false);
             Categoria todas = new Categoria { Id = 0, Nombre = "Todas las Categorías" };
             categorias.Insert(0, todas);
-
             CategoriaPicker.ItemsSource = categorias;
-
             CategoriaPicker.ItemDisplayBinding = new Binding("Nombre");
-
             CategoriaPicker.SelectedItem = todas;
 
             _todosLosProductos = _productoRepo.GetAllProductos();
 
-            ProductosCollection.ItemsSource = _todosLosProductos;
+            OnCategoriaFilterChanged(null, null);
 
             if (_todosLosProductos == null || _todosLosProductos.Count == 0)
             {
@@ -53,22 +52,64 @@ namespace ComercioMaui.Views
             }
         }
 
+
         private void OnCategoriaFilterChanged(object sender, EventArgs e)
         {
             if (_todosLosProductos == null) return;
 
-            if (CategoriaPicker.SelectedItem is Categoria categoriaSeleccionada)
+            IEnumerable<Producto> productosFiltrados = _todosLosProductos;
+
+
+            if (CategoriaPicker.SelectedItem is Categoria categoriaSeleccionada && categoriaSeleccionada.Id != 0)
             {
-                if (categoriaSeleccionada.Id == 0)
-                    ProductosCollection.ItemsSource = _todosLosProductos;
-                else
-                    ProductosCollection.ItemsSource = _todosLosProductos
-                        .Where(p => p.CategoriaId == categoriaSeleccionada.Id)
-                        .ToList();
+                productosFiltrados = productosFiltrados
+                    .Where(p => p.CategoriaId == categoriaSeleccionada.Id);
             }
 
+
+            if (FavoritosSwitch.IsToggled)
+            {
+                productosFiltrados = productosFiltrados
+                    .Where(p => p.IsFavorito);
+            }
+
+
+            ProductosCollection.ItemsSource = productosFiltrados.ToList();
             ProductosCollection.SelectedItem = null;
         }
+
+        private void OnFavoritosSwitchToggled(object sender, ToggledEventArgs e)
+        {
+            OnCategoriaFilterChanged(sender, e);
+        }
+
+        private void OnToggleFavoritoClicked(object sender, EventArgs e)
+        {
+
+            if (sender is ImageButton button && button.BindingContext is Producto producto)
+            {
+                bool nuevoEstado = !producto.IsFavorito;
+
+                try
+                {
+                    _productoRepo.ToggleFavorito(producto.Id, nuevoEstado);
+
+                    producto.IsFavorito = nuevoEstado;
+
+
+                    if (FavoritosSwitch.IsToggled)
+                    {
+                        OnCategoriaFilterChanged(null, null);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Usar DisplayAlert es correcto aquí
+                    DisplayAlert("Error", $"No se pudo actualizar el estado de favorito: {ex.Message}", "OK");
+                }
+            }
+        }
+
 
         private async void OnAgregarProductoClicked(object sender, EventArgs e)
         {
@@ -88,6 +129,7 @@ namespace ComercioMaui.Views
             }
             else
             {
+                // Usar DisplayAlert es correcto aquí
                 await DisplayAlert("Seleccionar producto", "Debes seleccionar un producto para editar.", "OK");
             }
         }
@@ -96,6 +138,7 @@ namespace ComercioMaui.Views
         {
             if (ProductosCollection.SelectedItem is Producto productoSeleccionado)
             {
+                // Usar DisplayAlert es correcto aquí
                 bool confirm = await DisplayAlert(
                     "Confirmar eliminación",
                     $"¿Seguro que quieres eliminar '{productoSeleccionado.Nombre}'?",
@@ -106,6 +149,8 @@ namespace ComercioMaui.Views
                 {
                     _productoRepo.DeleteProducto(productoSeleccionado.Id);
 
+                    // Recargar la lista de todos los productos y el filtro
+                    _todosLosProductos = _productoRepo.GetAllProductos();
                     OnCategoriaFilterChanged(null, null);
 
                     ProductosCollection.SelectedItem = null;
