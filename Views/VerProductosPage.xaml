@@ -113,5 +113,12 @@
             <Button Text="Editar Producto" Clicked="OnEditarProductoClicked" />
             <Button Text="Eliminar Producto" Clicked="OnEliminarProductoClicked" BackgroundColor="Red" TextColor="White"/>
         </HorizontalStackLayout>
+
+        <Button Text="Exportar a CSV" 
+                Clicked="OnExportarCsvClicked" 
+                BackgroundColor="#007BFF" 
+                TextColor="White"
+                HorizontalOptions="Center"
+                Margin="0, 10, 0, 0"/>
     </VerticalStackLayout>
 </ContentPage>

@@ -4,6 +4,9 @@ using Microsoft.Maui.Controls;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using System.Text;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace ComercioMaui.Views
 {
@@ -104,7 +107,6 @@ namespace ComercioMaui.Views
                 }
                 catch (Exception ex)
                 {
-                    // Usar DisplayAlert es correcto aquí
                     DisplayAlert("Error", $"No se pudo actualizar el estado de favorito: {ex.Message}", "OK");
                 }
             }
@@ -129,7 +131,7 @@ namespace ComercioMaui.Views
             }
             else
             {
-                // Usar DisplayAlert es correcto aquí
+
                 await DisplayAlert("Seleccionar producto", "Debes seleccionar un producto para editar.", "OK");
             }
         }
@@ -138,7 +140,6 @@ namespace ComercioMaui.Views
         {
             if (ProductosCollection.SelectedItem is Producto productoSeleccionado)
             {
-                // Usar DisplayAlert es correcto aquí
                 bool confirm = await DisplayAlert(
                     "Confirmar eliminación",
                     $"¿Seguro que quieres eliminar '{productoSeleccionado.Nombre}'?",
@@ -149,7 +150,6 @@ namespace ComercioMaui.Views
                 {
                     _productoRepo.DeleteProducto(productoSeleccionado.Id);
 
-                    // Recargar la lista de todos los productos y el filtro
                     _todosLosProductos = _productoRepo.GetAllProductos();
                     OnCategoriaFilterChanged(null, null);
 
@@ -161,6 +161,82 @@ namespace ComercioMaui.Views
             else
             {
                 await DisplayAlert("Seleccionar producto", "Debes seleccionar un producto para eliminar.", "OK");
+            }
+        }
+
+        private string GenerarCsvContent(List<Producto> productos)
+        {
+            var sb = new StringBuilder();
+
+            // Cabecera CSV
+            sb.AppendLine("ID Producto;Nombre;Precio;Stock;Stock Minimo;Categoria ID;Es Favorito;Fecha Creacion;Fecha Modificacion");
+
+            // Cuerpo CSV
+            foreach (var p in productos)
+            {
+                sb.AppendLine($"{p.Id};" +
+                              $"{p.Nombre};" +
+                              $"{p.Precio:F2};" +
+                              $"{p.Stock};" +
+                              $"{p.StockMinimo};" +
+                              $"{p.CategoriaId};" +
+                              $"{p.IsFavorito};" +
+                              $"{p.CreatedAt:yyyy-MM-dd HH:mm:ss};" +
+                              $"{p.UpdatedAt:yyyy-MM-dd HH:mm:ss}");
+            }
+
+            return sb.ToString();
+        }
+
+
+        private async void OnExportarCsvClicked(object sender, EventArgs e)
+        {
+            if (ProductosCollection.ItemsSource is not IEnumerable<Producto> productosVisibles)
+            {
+                await DisplayAlert("Exportar CSV", "No hay productos para exportar.", "OK");
+                return;
+            }
+
+            var productosList = productosVisibles.ToList();
+
+            if (productosList.Count == 0)
+            {
+                await DisplayAlert("Exportar CSV", "No hay productos visibles para exportar.", "OK");
+                return;
+            }
+
+            try
+            {
+                string csvContent = GenerarCsvContent(productosList);
+
+
+                string fileName = $"Inventario_{DateTime.Now:yyyyMMdd_HHmmss}.csv";
+                string tempFilePath = Path.Combine(FileSystem.CacheDirectory, fileName);
+
+                await File.WriteAllTextAsync(tempFilePath, csvContent, Encoding.UTF8);
+
+                if (DeviceInfo.Idiom == DeviceIdiom.Desktop)
+                {
+
+                    await Launcher.Default.OpenAsync(new OpenFileRequest(fileName, new ReadOnlyFile(tempFilePath)));
+
+                    await DisplayAlert("Exportación Lista",
+                                        "El archivo CSV se ha generado y abierto. Guárdalo desde la aplicación que lo abrió (Excel, Bloc de Notas, etc.).",
+                                        "OK");
+                }
+                // --- PARA MÓVIL (Android/iOS) ---
+                else
+                {
+                    await Share.Default.RequestAsync(new ShareFileRequest
+                    {
+                        Title = "Exportar Inventario CSV",
+                        File = new ShareFile(tempFilePath)
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error de Exportación", $"Ocurrió un error: {ex.Message}", "OK");
             }
         }
     }
